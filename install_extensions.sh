@@ -1,0 +1,43 @@
+#!/bin/bash
+
+extensions=(
+    "ancientlord.nightowl-theme"
+    "arcticicestudio.nord-visual-studio-code"
+    "blackboxapp.blackbox"
+    "blackboxapp.blackboxagent"
+    "bradlc.vscode-tailwindcss"
+    "burkeholland.simple-react-snippets"
+    "cleanthemes.matte-black-theme"
+    "dsznajder.es7-react-js-snippets"
+    "enkia.tokyo-night"
+    "esbenp.prettier-vscode"
+    "formulahendry.code-runner"
+    "freecodecamp.freecodecamp-dark-vscode-theme"
+    "github.copilot-chat"
+    "github.copilot"
+    "github.vscode-github-actions"
+    "google.gemini-cli-vscode-ide-companion"
+    "jock.svg"
+    "juanblanco.solidity"
+    "monokai.theme-monokai-pro-vscode"
+    "ms-azuretools.vscode-containers"
+    "ms-azuretools.vscode-docker"
+    "ms-python.python"
+    "ms-vscode-remote.remote-containers"
+    "ms-vscode-remote.remote-wsl"
+    "ms-vsliveshare.vsliveshare"
+    "pkief.material-icon-theme"
+    "pulkitgangwar.nextjs-snippets"
+    "qufiwefefwoyn.kanagawa"
+    "ritwickdey.liveserver"
+    "rodrigovallades.es7-react-js-snippets"
+    "shayanahmedkhan.freecodecamp-color-theme"
+    "simonsiefke.svg-preview"
+    "svelte.svelte-vscode"
+    "vincaslt.highlight-matching-tag"
+)
+
+for ext in "${extensions[@]}"; do
+    echo "Installing $ext..."
+    antigravity --install-extension "$ext"
+done
