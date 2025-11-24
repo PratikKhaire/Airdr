@@ -1,6 +1,8 @@
+/* eslint-disable no-empty-pattern */
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { getWeather } from "../../api";
 import Card from "./Card";
+import WeatherIcon from "../WeatherIcon";
 
 type Props = {};
 
@@ -18,10 +20,7 @@ export default function DailyForecast({}: Props) {
               weekday: "short",
             })}{" "}
           </p>
-          <img
-            src={` https://openweathermap.org/img/wn/${day.weather[0].icon}.png`}
-            alt="weather icon"
-          />
+          <WeatherIcon src={day.weather[0].icon} />
           <p className=" ">{Math.round(day.temp.day)}°F</p>
           <p className=" text-gray-500/75 ">{Math.round(day.temp.min)}°F</p>
           <p className=" text-gray-500/75 ">{Math.round(day.temp.max)}°F</p>
