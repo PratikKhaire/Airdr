@@ -2,8 +2,11 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import Card from "./Card";
 import { getWeather } from "../../api";
 import { number } from "zod";
+import type { Coords } from "../../types";
 
-type Props = {};
+type Props = {
+  coords: Coords;
+};
 
 
 const rows = [
@@ -34,11 +37,10 @@ const rows = [
 
 ] as const
 
-export default function AdditionalInfo({}: Props) {
-
-    const { data } = useSuspenseQuery({
+export default function AdditionalInfo({coords}: Props) {
+ const { data } = useSuspenseQuery({
     queryKey: ["weather"],
-    queryFn: () => getWeather({ lat: 10, lon: 25 }),
+    queryFn: () => getWeather({ lat: coords.lat, lon: coords.lon }),
   });
   return (
     <Card title="Additional Weather Info" 
@@ -52,15 +54,20 @@ export default function AdditionalInfo({}: Props) {
     </Card>
   )
 }
+       
 
-function FormateComponent({value,number} :{value:string, number:number}{
 
-    if(value ==='sunrise' || value ==='sunset') 
-        return new Date(number * 1000).toLocaleTimeString(undefined, {
-              hour: "numeric",
-              minute: "2-digit",
-              hour12: true,
-            }))
+function FormateComponent(
+  { value, number }: { value: string; number: number }
+): string | number {
 
-return number
-})
+  if (value === "sunrise" || value === "sunset") {
+    return new Date(number * 1000).toLocaleTimeString(undefined, {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+  }
+
+  return number;
+}
