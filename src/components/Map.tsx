@@ -1,6 +1,6 @@
 import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import type { Coords } from "../types";
+import type { Coords, MapClickTypes } from "../types";
 
 type Props = {
   coords: Coords;
@@ -29,21 +29,17 @@ export default function Map({ coords, onMapClick }: Props) {
 
 
 
-
 function MapClick({
   onMapClick,
   coords,
-}: {
-  onMapClick: (lat: number, lon: number) => void
-  coords: Coords
-}) {
-  const map = useMap()
-  map.panTo([coords.lat, coords.lon])
+}: MapClickTypes) {
+  const map = useMap();
+  map.panTo([coords.lat, coords.lon]);
 
   map.on("click", (e) => {
-    const { lat, lng } = e.latlng
-    onMapClick(lat, lng)
-  })
+    const { lat, lng } = e.latlng;
+    onMapClick(lat, lng);
+  });
 
-  return null
+  return null;
 }
