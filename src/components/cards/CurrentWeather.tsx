@@ -26,7 +26,7 @@ export default function CurrentWeather({ coords }: Props) {
       </div>
 
       <div className=" flex flex-col gap-2 items-center ">
-        <p className=" text-xl ">Local Time:</p>
+        <p className=" text-xl text-center ">Local Time:</p>
         <h3 className=" text-4xl font-semibold">
           {new Intl.DateTimeFormat("en-US", {
             hour: "2-digit",

@@ -1,4 +1,5 @@
 import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
+import { useEffect } from "react";
 import "leaflet/dist/leaflet.css";
 import type { Coords, MapClickTypes } from "../types";
 
@@ -29,12 +30,21 @@ export default function Map({ coords, onMapClick }: Props) {
 
 function MapClick({ onMapClick, coords }: MapClickTypes) {
   const map = useMap();
-  map.panTo([coords.lat, coords.lon]);
 
-  map.on("click", (e) => {
-    const { lat, lng } = e.latlng;
-    onMapClick(lat, lng);
-  });
+  useEffect(() => {
+    map.panTo([coords.lat, coords.lon]);
+  }, [coords, map]);
+
+  useEffect(() => {
+    const handleClick = (e: any) => {
+      const { lat, lng } = e.latlng;
+      onMapClick(lat, lng);
+    };
+    map.on("click", handleClick);
+    return () => {
+      map.off("click", handleClick);
+    };
+  }, [map, onMapClick]);
 
   return null;
 }
