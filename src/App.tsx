@@ -1,27 +1,23 @@
-import { useQuery } from "@tanstack/react-query";
-import { getWeather } from "./api";
-import Card from "./components/cards/Card";
 import DailyForecast from "./components/cards/DailyForecast";
 import HourlyForecast from "./components/cards/HourlyForecast";
 import CurrentWeather from "./components/cards/CurrentWeather";
 import AdditionalInfo from "./components/cards/AdditionalInfo";
 import Map from "./components/Map";
 import { useState } from "react";
-import { Coords } from "./types";
-
+import type { Coords } from "./types";
 const App = () => {
- const [ coords, setCoords] = useState<Coords>({lat:10,lon:25})
- const onMapClick = (lat:number,lon:number) =>{
-  setCoords({lat,lon})
- }
+  const [coords, setCoords] = useState<Coords>({ lat: 10, lon: 25 });
+  const onMapClick = (lat: number, lon: number) => {
+    setCoords({ lat, lon });
+  };
   return (
     <>
       <div className=" flex flex-col gap-8  ">
-        <Map coords={coords} onMapClick={onMapClick}/>
-        <CurrentWeather  coords={coords} />
-        <HourlyForecast coords={coords}/>
+        <Map coords={coords} onMapClick={onMapClick} />
+        <CurrentWeather coords={coords} />
+        <HourlyForecast coords={coords} />
 
-        <DailyForecast  coords={coords}/>
+        <DailyForecast coords={coords} />
         <AdditionalInfo coords={coords} />
       </div>
     </>

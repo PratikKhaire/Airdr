@@ -9,11 +9,11 @@ type Props = {
   coords: Coords;
 };
 
-export default function DailyForecast({coords}: Props) {
-   const { data } = useSuspenseQuery({
-      queryKey: ["weather"],
-      queryFn: () => getWeather({ lat: coords.lat, lon: coords.lon }),
-    });
+export default function DailyForecast({ coords }: Props) {
+  const { data } = useSuspenseQuery({
+    queryKey: ["weather", coords],
+    queryFn: () => getWeather({ lat: coords.lat, lon: coords.lon }),
+  });
   return (
     <Card title="Daily Forecast " childrenClassName="flex flex-col gap-4 ">
       {data.daily.map((day) => (

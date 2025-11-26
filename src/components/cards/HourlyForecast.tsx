@@ -7,11 +7,11 @@ import type { Coords } from "../../types";
 type Props = {
   coords: Coords;
 };
-export default function HourlyForecast({coords}: Props) {
-   const { data } = useSuspenseQuery({
-      queryKey: ["weather"],
-      queryFn: () => getWeather({ lat: coords.lat, lon: coords.lon }),
-    });
+export default function HourlyForecast({ coords }: Props) {
+  const { data } = useSuspenseQuery({
+    queryKey: ["weather", coords],
+    queryFn: () => getWeather({ lat: coords.lat, lon: coords.lon }),
+  });
   return (
     <Card
       title="Hourly Forecast ( 48 hours)"

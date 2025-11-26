@@ -17,7 +17,7 @@ export default function Map({ coords, onMapClick }: Props) {
       scrollWheelZoom={false}
     >
       {" "}
-      <MapClick onMapClick={onMapClick} />
+      <MapClick onMapClick={onMapClick} coords={coords} />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -27,12 +27,7 @@ export default function Map({ coords, onMapClick }: Props) {
   );
 }
 
-
-
-function MapClick({
-  onMapClick,
-  coords,
-}: MapClickTypes) {
+function MapClick({ onMapClick, coords }: MapClickTypes) {
   const map = useMap();
   map.panTo([coords.lat, coords.lon]);
 
