@@ -15,7 +15,7 @@ export default function Map({ coords, onMapClick }: Props) {
       key={`${coords.lat},${coords.lon}`}
       center={[lat, lon]}
       zoom={13}
-      style={{ width:'full', height: "500px" }}
+      style={{ width: "full", height: "500px" }}
       scrollWheelZoom={false}
     >
       {" "}
