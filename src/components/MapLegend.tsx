@@ -1,26 +1,28 @@
 type Props = {
-  mapType: string
-}
+  mapType: string;
+};
 
 export default function MapLegend({ mapType }: Props) {
-  const data = mapTypeData[mapType]
+  const data = mapTypeData[mapType];
 
-  const maxValue = data.stops[data.stops.length - 1].value
+  const maxValue = data.stops[data.stops.length - 1].value;
 
   const gradientStops = data.stops
     .map((stop) => `${stop.color} ${(stop.value / maxValue) * 100}%`)
-    .join(", ")
+    .join(", ");
 
   return (
-    <div className="absolute top-4 right-4 z-1000 w-48 xs:w-96 rounded-xl shadow-lg p-4 bg-background/50 border border-accent/70 flex flex-col gap-4">
-      <h3 className="text-sm font-semibold text-foreground">{data.title}</h3>
+    <div className="absolute top-4 right-4 z-1000 w-48 xs:w-96 rounded-2xl shadow-2xl p-4 dark:bg-linear-to-br dark:from-white/10 dark:to-white/5 bg-background/90 dark:backdrop-blur-xl border dark:border-white/20 border-accent/70 flex flex-col gap-4 hover:scale-105 transition-transform duration-300">
+      <h3 className="text-sm font-semibold dark:text-orange-400 text-foreground">
+        {data.title}
+      </h3>
       <div
-        className="w-full h-6 rounded-xl border border-accent/70"
+        className="w-full h-6 rounded-xl border dark:border-white/30 border-accent/70 shadow-lg"
         style={{
           background: `linear-gradient(to right, ${gradientStops})`,
         }}
       />
-      <div className="flex justify-between text-xs text-foreground">
+      <div className="flex justify-between text-xs dark:text-amber-300 text-foreground font-medium">
         <span>
           {data.stops[0].value} {data.unit}
         </span>
@@ -29,7 +31,7 @@ export default function MapLegend({ mapType }: Props) {
         </span>
       </div>
     </div>
-  )
+  );
 }
 
 const mapTypeData: Record<
@@ -112,10 +114,10 @@ const mapTypeData: Record<
       { value: 200, color: "rgba(13, 17, 38, 1)" },
     ],
   },
-}
+};
 
 interface ColorStop {
-  value: number
-  color: string
-  opacity?: number
+  value: number;
+  color: string;
+  opacity?: number;
 }
