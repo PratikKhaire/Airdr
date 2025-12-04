@@ -21,8 +21,8 @@ import LightDarkToggle from "./components/LightDarkToggle";
 
 function App() {
   const [coordinates, setCoords] = useState<Coords>({ lat: 50, lon: 45 });
-  const [location, setLocation] = useState("Tokyo");
-  const [mapType, setMapType] = useState("clouds_new");
+  const [location, setLocation] = useState("Mumbai");
+  const [mapType, setMapType] = useState("temp_new");
   const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
 
   const { data: geocodeData } = useQuery({
@@ -48,7 +48,7 @@ function App() {
       <div className="hidden dark:block fixed top-1/2 right-1/4 w-48 h-48 bg-orange-600/5 rounded-full blur-[80px] pointer-events-none z-0" />
 
       <MobileHeader setIsSidePanelOpen={setIsSidePanelOpen} />
-      <div className="flex flex-col gap-8 pt-4 p-8 xs:pt-8 lg:w-[calc(100dvw-var(--sidebar-width))] 2xl:h-screen 2xl:min-h-[1120px] relative z-10">
+      <div className="flex flex-col gap-8 pt-4 p-8 xs:pt-8 lg:w-[calc(100dvw-var(--sidebar-width))] relative z-10">
         <div className="flex flex-col gap-4 xs:flex-row xs:gap-8 px-4 py-4 rounded-2xl dark:bg-linear-to-r dark:from-white/5 dark:to-white/[0.02] dark:backdrop-blur-sm dark:border dark:border-white/10">
           <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-start md:items-center">
             <h1 className="text-2xl font-semibold bg-linear-to-r from-orange-400 to-amber-500 bg-clip-text text-transparent">
@@ -74,13 +74,8 @@ function App() {
             </button>
           </div>
         </div>
-        <div className="grid grid-cols-1 2xl:flex-1 2xl:min-h-0 md:grid-cols-2 2xl:grid-cols-4 2xl:grid-rows-4 gap-4">
-          <div className="relative h-120 2xl:h-auto col-span-1 md:col-span-2 2xl:col-span-4 2xl:row-span-2 order-1 rounded-3xl overflow-hidden dark:ring-2 dark:ring-white/10 dark:shadow-2xl dark:shadow-orange-500/10 group">
-            {/* Map glow overlay */}
-            <div className="absolute inset-0 bg-linear-to-br from-orange-500/5 via-transparent to-amber-500/5 pointer-events-none z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <Map coords={coords} onMapClick={onMapClick} mapType={mapType} />
-            <MapLegend mapType={mapType} />
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-4">
+          {/* .......... card section ...... */}
           <div className="col-span-1 2xl:row-span-2 order-2">
             <Suspense fallback={<CurrentSkeleton />}>
               <CurrentWeather coords={coords} />
@@ -101,6 +96,14 @@ function App() {
               <AdditionalInfo coords={coords} />
             </Suspense>
           </div>
+        </div>
+
+        {/* map section */}
+        <div className="relative h-[500px] md:h-[600px] rounded-3xl overflow-hidden dark:ring-2 dark:ring-white/10 dark:shadow-2xl dark:shadow-orange-500/10 group">
+          {/* Map glow overlay */}
+          <div className="absolute inset-0 bg-linear-to-br from-orange-500/5 via-transparent to-amber-500/5 pointer-events-none z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <Map coords={coords} onMapClick={onMapClick} mapType={mapType} />
+          <MapLegend mapType={mapType} />
         </div>
       </div>
       <SidePanel
