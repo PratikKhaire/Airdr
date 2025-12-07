@@ -42,21 +42,69 @@ function AirPollution({ coords }: Props) {
     queryFn: () => getAirPollution(coords),
   });
 
+  // Calculate actual AQI from PM2.5 concentration using US EPA standard
+  const calculateAQI = (pm25: number): number => {
+    if (pm25 <= 12) return Math.round(((50 - 0) / (12 - 0)) * (pm25 - 0) + 0);
+    if (pm25 <= 35.4)
+      return Math.round(((100 - 51) / (35.4 - 12.1)) * (pm25 - 12.1) + 51);
+    if (pm25 <= 55.4)
+      return Math.round(((150 - 101) / (55.4 - 35.5)) * (pm25 - 35.5) + 101);
+    if (pm25 <= 150.4)
+      return Math.round(((200 - 151) / (150.4 - 55.5)) * (pm25 - 55.5) + 151);
+    if (pm25 <= 250.4)
+      return Math.round(((300 - 201) / (250.4 - 150.5)) * (pm25 - 150.5) + 201);
+    if (pm25 <= 350.4)
+      return Math.round(((400 - 301) / (350.4 - 250.5)) * (pm25 - 250.5) + 301);
+    if (pm25 <= 500.4)
+      return Math.round(((500 - 401) / (500.4 - 350.5)) * (pm25 - 350.5) + 401);
+    return 500; // Beyond 500 is hazardous
+  };
+
+  const pm25 = data.list[0].components.pm2_5;
+  const actualAQI = calculateAQI(pm25);
+
+  const getAQICategory = (aqi: number): string => {
+    if (aqi <= 50) return "Good";
+    if (aqi <= 100) return "Moderate";
+    if (aqi <= 150) return "Unhealthy for Sensitive Groups";
+    if (aqi <= 200) return "Unhealthy";
+    if (aqi <= 300) return "Very Unhealthy";
+    return "Hazardous";
+  };
+
+  const getAQIColor = (aqi: number): string => {
+    if (aqi <= 50) return "text-green-500";
+    if (aqi <= 100) return "text-yellow-500";
+    if (aqi <= 150) return "text-orange-500";
+    if (aqi <= 200) return "text-red-500";
+    if (aqi <= 300) return "text-purple-500";
+    return "text-rose-900";
+  };
+
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-semibold bg-linear-to-r from-orange-400 to-amber-500 bg-clip-text text-transparent">Air Pollution</h1>
-      <h1 className="text-5xl font-semibold">{data.list[0].main.aqi}</h1>
+      <h1 className="text-2xl font-semibold bg-linear-to-r from-orange-400 to-amber-500 bg-clip-text text-transparent">
+        Air Pollution
+      </h1>
+      <div className="flex items-baseline gap-3">
+        <h1 className={`text-5xl font-semibold ${getAQIColor(actualAQI)}`}>
+          {actualAQI}
+        </h1>
+        <span className="text-sm text-muted-foreground">
+          (PM2.5: {pm25.toFixed(1)} µg/m³)
+        </span>
+      </div>
       <div className="flex items-center gap-2">
-        <h1 className="text-2xl font-semibold">AQI</h1>
+        <h1 className="text-xl font-semibold">{getAQICategory(actualAQI)}</h1>
         <Tooltip>
           <TooltipTrigger>
             <Information className="size-4" />
           </TooltipTrigger>
           <TooltipContent className="z-2000">
             <p className="max-w-xs">
-              {" "}
-              Air Quality Index. Possible values: 1, 2, 3, 4, 5. Where 1 = Good,
-              2 = Fair, 3 = Moderate, 4 = Poor, 5 = Very Poor.
+              Air Quality Index based on PM2.5 concentration. 0-50: Good,
+              51-100: Moderate, 101-150: Unhealthy for Sensitive Groups,
+              151-200: Unhealthy, 201-300: Very Unhealthy, 301+: Hazardous
             </p>
           </TooltipContent>
         </Tooltip>

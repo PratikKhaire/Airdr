@@ -1,14 +1,10 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import Card from "./Card";
 import { getWeather } from "../../api";
-import Sunrise from "/src/assets/sunrise.svg?react";
-import Sunset from "/src/assets/sunset.svg?react";
-import Cloud from "/src/assets/cloud.svg?react";
-import Uv from "/src/assets/uv.svg?react";
-import Wind from "/src/assets/wind.svg?react";
-import Pressure from "/src/assets/pressure.svg?react";
+
 import UpArrow from "/src/assets/uparrow.svg?react";
 import type { Coords } from "../../types";
+import { rows } from "@/utils/constant";
 
 type Props = {
   coords: Coords;
@@ -71,35 +67,35 @@ function FormatComponent({ value, number }: { value: string; number: number }) {
   return number;
 }
 
-const rows = [
-  {
-    label: "Cloudiness (%)",
-    value: "clouds",
-    Icon: Cloud,
-  },
-  {
-    label: "UV Index",
-    value: "uvi",
-    Icon: Uv,
-  },
-  {
-    label: "Wind Direction",
-    value: "wind_deg",
-    Icon: Wind,
-  },
-  {
-    label: "Pressure (hPa)",
-    value: "pressure",
-    Icon: Pressure,
-  },
-  {
-    label: "Sunrise",
-    value: "sunrise",
-    Icon: Sunrise,
-  },
-  {
-    label: "Sunset",
-    value: "sunset",
-    Icon: Sunset,
-  },
-] as const;
+// const rows = [
+//   {
+//     label: "Cloudiness (%)",
+//     value: "clouds",
+//     Icon: Cloud,
+//   },
+//   {
+//     label: "UV Index",
+//     value: "uvi",
+//     Icon: Uv,
+//   },
+//   {
+//     label: "Wind Direction",
+//     value: "wind_deg",
+//     Icon: Wind,
+//   },
+//   {
+//     label: "Pressure (hPa)",
+//     value: "pressure",
+//     Icon: Pressure,
+//   },
+//   {
+//     label: "Sunrise",
+//     value: "sunrise",
+//     Icon: Sunrise,
+//   },
+//   {
+//     label: "Sunset",
+//     value: "sunset",
+//     Icon: Sunset,
+//   },
+// ] as const;

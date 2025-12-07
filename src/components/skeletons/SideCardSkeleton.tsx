@@ -3,6 +3,7 @@ import { Skeleton } from "../ui/skeleton"
 
 type Props = {}
 
+// eslint-disable-next-line no-empty-pattern
 export default function SideCardSkeleton({}: Props) {
   return (
     <Card

@@ -20,8 +20,17 @@ export default function HourlyForecast({ coords }: Props) {
       className="relative overflow-hidden"
     >
       {/* Gradient fade edges */}
-      <div className="absolute left-0 top-0 bottom-0 w-8 bg-linear-to-r from-card to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-8 bg-linear-to-l from-card to-transparent z-10 pointer-events-none" />
+      <div
+        className="absolute left-0 top-0 bottom-0 w-6
+  bg-linear-to-r from-[rgba(255,255,255,0.15)] to-transparent
+  rounded-l-[inherit] pointer-events-none z-10"
+      />
+
+      <div
+        className="absolute right-0 top-0 bottom-0 w-6
+  bg-linear-to-l from-[rgba(255,254,254,0.15)] to-transparent
+  rounded-r-[inherit] pointer-events-none z-10"
+      />
 
       {data.hourly.map((hour, index) => (
         <div
