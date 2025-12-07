@@ -30,8 +30,5 @@
     }
   },
   "include": ["src"],
-  "exclude": [
-    "node_modules",
-    "src/components/lightswind"
-  ]
+  "exclude": ["node_modules", "src/components/lightswind"]
 }

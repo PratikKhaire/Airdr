@@ -42,7 +42,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           type: "spring",
           stiffness: 400,
           damping: 20,
-          duration: 0.1 // Keep duration very short
+          duration: 0.1, // Keep duration very short
         }}
         {...props}
       />
