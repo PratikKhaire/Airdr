@@ -3,7 +3,8 @@ import * as React from "react";
 import { createPortal } from "react-dom";
 import { cn } from "../../lib/utils";
 import { X } from "lucide-react";
-import { motion, AnimatePresence, HTMLMotionProps } from "framer-motion"; // Import HTMLMotionProps
+import { motion, AnimatePresence } from "framer-motion";
+import type { HTMLMotionProps } from "framer-motion"; // type-only import for HTMLMotionProps
 
 interface DrawerContextValue {
   open: boolean;

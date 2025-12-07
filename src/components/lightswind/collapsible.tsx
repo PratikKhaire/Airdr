@@ -1,7 +1,8 @@
 "use client";
 import * as React from "react";
 import { cn } from "../../lib/utils";
-import { motion, AnimatePresence, HTMLMotionProps } from "framer-motion"; // Import HTMLMotionProps
+import { motion, AnimatePresence } from "framer-motion";
+import type { HTMLMotionProps } from "framer-motion"; // type-only import for HTMLMotionProps
 
 interface CollapsibleContextValue {
   open: boolean;

@@ -1,7 +1,8 @@
 "use client";
 import * as React from "react";
 import { cn } from "../../lib/utils";
-import { motion, HTMLMotionProps } from "framer-motion"; // Import motion and HTMLMotionProps
+import { motion } from "framer-motion"; // runtime import
+import type { HTMLMotionProps } from "framer-motion"; // type-only import
 
 // Extend HTMLMotionProps instead of React.InputHTMLAttributes directly
 // HTMLMotionProps already includes React.InputHTMLAttributes

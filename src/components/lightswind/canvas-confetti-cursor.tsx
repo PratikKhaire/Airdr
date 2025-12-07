@@ -166,13 +166,14 @@ export const CanvasConfettiCursor: React.FC<CanvasConfettiCursorProps> = ({
   useEffect(() => {
     if (!enabled) return;
     // OnMove (mouse/touch)
-    function moveHandler(event: MouseEvent | TouchEvent) {
+    function moveHandler(event: Event) {
+      const ev = event as MouseEvent | TouchEvent;
       let x = 0, y = 0;
-      if ("touches" in event && event.touches[0]) {
-        x = event.touches[0].clientX;
-        y = event.touches[0].clientY;
-      } else if ("clientX" in event) {
-        x = event.clientX; y = event.clientY;
+      if ("touches" in ev && ev.touches && ev.touches[0]) {
+        x = ev.touches[0].clientX;
+        y = ev.touches[0].clientY;
+      } else if ("clientX" in ev && typeof (ev as MouseEvent).clientX === 'number') {
+        x = (ev as MouseEvent).clientX; y = (ev as MouseEvent).clientY;
       }
       if (fillParent && parentRef.current) {
         const rect = parentRef.current.getBoundingClientRect();

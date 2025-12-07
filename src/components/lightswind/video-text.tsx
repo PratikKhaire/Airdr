@@ -2,7 +2,8 @@
 
 import { cn } from "../../lib/utils";
 import React, { ReactNode, useEffect, useState } from "react";
-import { motion, HTMLMotionProps } from "framer-motion";
+import { motion } from "framer-motion";
+import type { HTMLMotionProps } from "framer-motion";
 
 export interface VideoTextProps {
   src: string;
